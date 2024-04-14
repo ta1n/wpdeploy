@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  myapp:
+    image: talha001/wpdep:latest
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    command: "node app.js"
+

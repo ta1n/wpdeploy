@@ -17,9 +17,9 @@ export dport=$dbport
 
 envsubst < compose.yml > $foldername/compose.yml
 
-#docker exec wpdeploy sh -c "ufw allow $port"
+docker exec wpdeploy sh -c "ufw allow $port"
 
 cd $foldername
 docker compose up
-echo abc
+echo Success
 
