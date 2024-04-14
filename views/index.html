@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deploy Wordpress Site</title>
+
+
+
+</head>
+<body>
+  
+
+<input id="inp" type="text" placeholder="Enter site name">
+    <button onclick="pt()">Deploy</button>
+<pre id="op"><pre>
+<br>
+<p id="depl" style="display:none">Your site is being deployed. Wait a few seconds and Click <a id="url" href="">Here</a> to go to your site </p>
+
+
+
+<script>
+async function postData(url = "", data = {}) {
+  const response = await fetch(url, {
+    method: "POST", 
+    mode: "cors", 
+    cache: "no-cache", 
+    credentials: "same-origin", 
+    headers: {
+      "Content-Type": "application/json",
+    },
+    redirect: "follow", 
+    referrerPolicy: "no-referrer",
+    body: JSON.stringify(data), 
+  });
+  return response.json();
+}
+
+async function pt(){
+let ipcmd=document.getElementById('inp').value ;
+    let cmd={cmd:ipcmd} ;
+ postData("http://localhost:3000/cmdrun", cmd).then((data) => {
+  console.log(data); 
+    //document.getElementById("op").innerHTML=data.outp ;
+     let port=data.outp ;
+     url=`http://127.0.0.1:${port}` ;
+     document.getElementById("depl").setAttribute('style', "diplay:block");
+     document.getElementById("url").setAttribute('href', url);
+
+ });
+}
+
+
+</script>
+
+</body>
+</html>
