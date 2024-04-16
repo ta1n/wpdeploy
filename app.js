@@ -5,7 +5,10 @@ const { spawn } = require('child_process');
 
 const app = express();
 
-app.listen(3000);
+const PORT=3000 ;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
 
 let port=3000 ;
 let dbport=3300 ;
@@ -37,13 +40,27 @@ function executeShellCommand(command, callback) {
         callback(stdout);
     });
 }
+const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+function generateString(length) {
+    let result = ' ';
+    const charactersLength = characters.length;
+    for ( let i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result;
+}
+
+const siteName=generateString(5) ;
+console.log(siteName);
 
 app.post('/cmdrun', async (req, res) => {
     console.log(req.body.cmd) ;
     let cmd=req.body.cmd ;
 
     console.log(cmd);
-    let siteName='"'+cmd+'"' ;
+    // let siteName='"'+cmd+'"' ;
     port=port + 1 ;
     dbport=dbport+1 ;
 

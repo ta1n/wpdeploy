@@ -3,19 +3,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Deploy Wordpress Site</title>
-
+  <script src="https://cdn.tailwindcss.com"></script>
 
 
 </head>
 <body>
   
 
-<input id="inp" type="text" placeholder="Enter site name">
-    <button onclick="pt()">Deploy</button>
-<pre id="op"><pre>
-<br>
-<p id="depl" style="display:none">Your site is being deployed. Wait a few seconds and Click <a id="url" href="">Here</a> to go to your site </p>
+<!-- <input id="inp" type="text" placeholder="Enter site name"> -->
+<div class="h-[10vh] bg-black text-white text-center font-bold text-3xl">
+    <div class="m-auto p-4">WordPress Deploy</div>
+</div>
+<div class="w-full p-8 m-auto flex flex-col">
+    <h1 class="font-extrabold text-3xl text-center">Deploy wordpress by pressing the button below</h1>
+    <button class="mx-auto my-8 rounded-lg shadow-xl w-1/4 sm:w-28 h-12 border border-2 border-black bg-green-500 text-white hover:bg-red-500" onclick="pt()">DEPLOY</button>
+    <!-- <pre id="op"><pre> -->
+<div id="depl" style="display:none" class="p-8"><p class="text-center">Your site is being deployed...</p> <p class="text-center">Wait a few seconds and Click <a class="text-blue-500 font-bold text-xl hover:bg-green-400" id="url" href="">Here</a> to go to your site</p> </div>
 
+</div>
 
 
 <script>
@@ -36,9 +41,9 @@ async function postData(url = "", data = {}) {
 }
 
 async function pt(){
-let ipcmd=document.getElementById('inp').value ;
-    let cmd={cmd:ipcmd} ;
- postData("http://localhost:3000/cmdrun", cmd).then((data) => {
+// let ipcmd=document.getElementById('inp').value ;
+    // let cmd={cmd:ipcmd} ;
+ postData("http://localhost:3000/cmdrun").then((data) => {
   console.log(data); 
     //document.getElementById("op").innerHTML=data.outp ;
      let port=data.outp ;
